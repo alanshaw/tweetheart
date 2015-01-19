@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  background: #444;
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: 300;
+}
+h1 {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 10px;
+  font-size: 1.5em;
+  font-weight: 300;
+  color: #fff;
+}
+#heart {
+  color: #e8226f;
+  font-size: 5em;
+  margin: 10px;
+  overflow: hidden;
+  shape-inside: polygon(11.17% 10.25%,2.50% 30.56%,3.92% 55.34%,12.33% 68.87%,26.67% 82.62%,49.33% 101.25%,73.50% 76.82%,85.17% 65.63%,91.63% 55.51%,97.10% 31.32%,85.79% 10.21%,72.47% 5.35%,55.53% 14.12%,48.58% 27.88%,41.79% 13.72%,27.50% 5.35%);
+  text-align: center;
+  text-shadow: 0 0 1em #e8226f;
+  -webkit-transform: perspective(600px) rotateY(0deg);
+  transform: perspective(600px) rotateY(0deg);
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+}
+#heart.spin {
+  -webkit-transform: perspective(600px) rotateY(360deg);
+  transform: perspective(600px) rotateY(360deg);
+}
+#heart span {
+  opacity: 1;
+  transition: opacity 0.5s linear;
+}
+#heart span.new {
+  opacity: 0;
+}
+#heart span:nth-child(even) {
+  color: #e73d7f;
+}
