@@ -1,10 +1,14 @@
 var socket = require('engine.io-client')('ws://' + location.host)
+var escape = require('escape-html')
+var async = require('async')
+
+var queue = async.queue(addTweet, 1)
 
 socket.on('open', function () {
   socket.on('message', function (data) {
     var tweet = JSON.parse(data)
     console.log(tweet)
-    addTweet(tweet)
+    queue.push(tweet)
   })
   socket.on('close', function () {
     console.log('Connection closed')
@@ -32,8 +36,8 @@ function spin () {
   heart.className = heart.className ? '' : 'spin'
 }
 
-function addTweet (tweet) {
-  var tweetHtml = ' <span class="new">' + tweet.user.name + ': ' + tweet.text + '</span>'
+function addTweet (t, cb) {
+  var tweetHtml = ' <span class="new">' + escape(t.user.name) + ': ' + escape(t.text) + '</span>'
 
   spin()
 
@@ -54,4 +58,6 @@ function addTweet (tweet) {
     }, 0)
 
   }, 400)
+
+  setTimeout(cb, 1000)
 }
